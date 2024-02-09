@@ -1,0 +1,5 @@
+.chat-list {
+    overflow: auto;
+    height: 70vh;
+    padding: 0;
+}

@@ -1,0 +1,21 @@
+POST http://localhost:5000/feedDB HTTP/1.1
+Content-Type: : application/json
+
+{}
+
+###
+GET http://localhost:5000/users/2 HTTP/1.1
+
+
+### 
+GET  http://localhost:5000/users/queue/?sender=10&receiver=9 HTTP/1.1
+Content-Type: application/json
+
+{
+    "sender": 10,
+    "receiver": 9
+}
+
+###
+GET  http://localhost:5000/users/favorites/2 HTTP/1.1
+Content-Type: application/json

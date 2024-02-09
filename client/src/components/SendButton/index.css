@@ -1,0 +1,9 @@
+.send_btn {
+    display: inline-block;
+    margin: 0 2%;
+}
+
+.new_message {
+    width: 92%;
+    height: 5vh;
+}
