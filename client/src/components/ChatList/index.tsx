@@ -37,7 +37,7 @@ const ChatList = () => {
           const isOnline = +days <= 184
 
           return (
-            <li key={user.index} className={`clearfix ${isOnline && 'active'}`}
+            <li key={index} className={`clearfix ${isOnline && 'active'}`}
             onClick={() => switchChat(user.id)}>
               
               <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar" />

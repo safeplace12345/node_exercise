@@ -33,7 +33,7 @@ usersRouter.get("/favorites/:uId", async (req, res, n) => {
 
   try {
     const users = await messagesSchema.sequelize.query(
-      `SELECT sender, receiver, name,  public."Users".id, "timeStamp", "surName", "userName"
+      `SELECT name,  public."Users".id, "timeStamp", "surName", "userName"
     FROM public."Messages" left join public."Users" on receiver = public."Users".id where sender=${uId} order by "timeStamp" DESC;`,
       { type: QueryTypes.SELECT }
     );
@@ -49,7 +49,7 @@ usersRouter.get("/favorites/:uId", async (req, res, n) => {
 
 usersRouter.get("/:id", async (req, res, n) => {
   const { id } = req.params;
-console.log({id})
+
   try {
     return await userSchema.findOne({
       where: {

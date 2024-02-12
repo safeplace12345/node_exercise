@@ -33,6 +33,7 @@ app.use((req, res, next) => {
   next(); // Go to next middleware
 });
 
+// Register Endpoints
 app.use('/feedDB', dbRouter);
 app.use('/users', usersRouter);
 

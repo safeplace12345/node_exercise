@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 import SendButton from './components/SendButton';
 import ChatList from './components/ChatList';
 import ChatHistory from './components/ChatHistory';
@@ -9,15 +10,27 @@ import './App.css';
 
 function App() {
   //Handle Offline errors
+  const [id, setId] = useState(0)
+  const [uiMessage, setUiMessage] = useState("")
   const dispatch = useDispatch()
   const cUser = useSelector((state: any) => state.root.user)
 
-  const saveData = async (opt: any) => {
-    if (!opt.target?.value) return;
-    
-    return await api.getCurrentUser(opt.target?.value, (data: any) => {
+  const saveData = async (e: any) => {
+    e.preventDefault()
+    if (!id) return;
+
+    return await api.getCurrentUser(id, (data: any) => {
       dispatch(actions.setCurrentUser(data))
     })
+  }
+
+  const seedDatabase = async (e: any) => {
+    e.preventDefault()
+    const data = await api.seedDatabase()
+    if (data.message === "success") {
+      return setUiMessage("Success!!")
+    }
+    return setUiMessage("Failed!!")
   }
 
   return (
@@ -46,10 +59,20 @@ function App() {
               </div>
             </div>
           </div> :
-          <select defaultValue={1} onChange={opt => saveData(opt)} className="form-select" aria-label="Default select example">
-            <option >Choose User</option>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(user => (<option key={user} value={user}>{user}</option>))}
-          </select>}
+          <form>
+            <div className="form-group">
+              <button type="submit" className="btn btn-primary" onClick={seedDatabase}>Seed Database</button>
+              {uiMessage && <span className={`badge badge-pill badge-${uiMessage === "Success!!" ? 'success' : 'danger'}`}>{uiMessage}</span>}
+            </div>
+            <div className="form-group">
+              <label htmlFor="exampleInputEmail1">User ID</label>
+              <input type="id"
+                onChange={(val) => (setId(+val.target.value))} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter User ID (1,2,3,4,5,6,7,8,9,10)" />
+              <small id="idHelp" className="form-text text-muted">We'll never share your id with anyone else.</small>
+            </div>
+            <button type="submit" className="btn btn-primary" onClick={saveData}>Submit</button>
+          </form>
+        }
       </div>
     </div>
   );

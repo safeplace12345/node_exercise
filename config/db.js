@@ -1,9 +1,8 @@
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize("postgres", "postgres", "root", {
-  host: "127.0.0.1",
+const sequelize = new Sequelize("PostgreSQL 15", "postgres", "root", {
+  host: "postgres_db",
   dialect: "postgres",
-  port: 50000,
 });
 
 const tDbConn = async () => {
@@ -11,8 +10,9 @@ const tDbConn = async () => {
     await sequelize.authenticate();
     console.log("Connected :)");
   } catch (error) {
-    console.log("Disconnected :)", error);
+    console.log("Disconnected )", error);
   }
 };
 
+tDbConn()
 module.exports = sequelize

@@ -5,7 +5,7 @@ export class ApiGateway {
         this.url = url
     }
 
-    async getMessageQueue(senderId: number, recipientId: number,  callBack: Function) {
+    async getMessageQueue(senderId: number, recipientId: number, callBack: Function) {
         const url = `${this.url}/users/queue/?sender=${senderId}&receiver=${recipientId}`
         try {
             const response = await fetch(url)
@@ -13,7 +13,6 @@ export class ApiGateway {
             if (queue) {
                 callBack(queue)
             }
-            console.log({ queue })
         } catch (error) {
             console.log(error)
         }
@@ -40,12 +39,23 @@ export class ApiGateway {
             const { user } = await response.json()
             if (user) {
                 callBack(user)
+                return user
             }
-            return user
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async seedDatabase() {
+        const url = `${this.url}/feedDB/`
+        try {
+            const response = await fetch(url)
+            const data = await response.json()
+            return data
         } catch (error) {
             console.log(error)
         }
     }
 }
 
-export const api = new ApiGateway('http://127.0.0.1:5000')
+export const api = new ApiGateway('http://127.0.0.1:3000')

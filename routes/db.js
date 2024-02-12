@@ -9,7 +9,7 @@ const dbRouter = express.Router({
   mergeParams: true,
 });
 
-dbRouter.post("/", async (req, res, n) => {
+dbRouter.post("/", async (_, res, n) => {
   const xlsxPath = path.join(__dirname, "../", "seeds.xlsx");
   try {
     return await readXlsx(xlsxPath, { sheet: 1 })

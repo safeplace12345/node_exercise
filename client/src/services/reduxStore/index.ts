@@ -7,14 +7,39 @@ export const actions = {
     setRecipient: createAction<any>("APP/setRecipient")
 }
 
-interface IState {
-    user: any,
-    recipient: number,
-    favorites: any,
-    queue: any
+export interface User {
+    sender?: number,
+    receiver?: number,
+    name: string,
+    id: number,
+    timeStamp?: Date,
+    surName: string,
+    userName: string
 }
+
+export interface Queue {
+    sender: number,
+    receiver: number,
+    name: string,
+    id: number,
+    content: string,
+    timeStamp: Date
+}
+
+export interface IState {
+    user: User,
+    recipient: number,
+    favorites: User[],
+    queue: Queue[]
+}
+
 const initialState: IState = {
-    user: {},
+    user: {
+        name: "",
+        id: 0,
+        surName: "",
+        userName: ""
+    },
     recipient: 1,
     favorites: [],
     queue: []
