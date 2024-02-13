@@ -50,6 +50,7 @@ Launches the test runner in the interactive watch mode
     In case you have made any assumptions, or we need any further instruction in order to make an endpoint work, please consider writing them to the Readme.md file
 
 > Sample endpoints
+
       ###
       POST http://localhost:3000/feedDB HTTP/1.1
       Content-Type: : application/json
