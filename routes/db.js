@@ -12,6 +12,9 @@ const dbRouter = express.Router({
 dbRouter.post("/", async (_, res, n) => {
   const xlsxPath = path.join(__dirname, "../", "seeds.xlsx");
   try {
+    const alreadySeeded = await messagesSchema.findOne({where: {id: 1}})
+    if(alreadySeeded.id) return res.status(200).json(SuccessMsg) 
+    
     return await readXlsx(xlsxPath, { sheet: 1 })
       .then(async (rows) => {
         rows.map((row) => {

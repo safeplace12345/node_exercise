@@ -26,8 +26,8 @@ function App() {
 
   const seedDatabase = async (e: any) => {
     e.preventDefault()
-    const data = await api.seedDatabase()
-    if (data.message === "success") {
+    const { message } = await api.seedDatabase()
+    if (message === "Success") {
       return setUiMessage("Success!!")
     }
     return setUiMessage("Failed!!")

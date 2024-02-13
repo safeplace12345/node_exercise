@@ -49,7 +49,9 @@ export class ApiGateway {
     async seedDatabase() {
         const url = `${this.url}/feedDB/`
         try {
-            const response = await fetch(url)
+            const response = await fetch(url, {
+                method: "POST"
+            })
             const data = await response.json()
             return data
         } catch (error) {
@@ -58,4 +60,4 @@ export class ApiGateway {
     }
 }
 
-export const api = new ApiGateway('http://127.0.0.1:3000')
+export const api = new ApiGateway('http://localhost:3000')

@@ -16,13 +16,13 @@ services:
     container_name: postgres_db
     image: postgres
     ports:
-      - '5433:50000'
+      - '5433:5432'
     volumes:
       - data:/data/db
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=PostgreSQL 15
+      - POSTGRES_USER=pccw_user
+      - POSTGRES_PASSWORD=pccw_password
+      - POSTGRES_DB=pccw_db
 
   adminer:
     image: adminer

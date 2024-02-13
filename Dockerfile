@@ -12,6 +12,7 @@ RUN npm install
 
 # Install nodemon globally
 RUN npm install -g nodemon
+RUN npm install dotenv
 
 # Bundle app source
 COPY . .
